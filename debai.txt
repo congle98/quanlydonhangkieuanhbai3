@@ -1,0 +1,37 @@
+Tạo dữ liệu dạng bảng
+Vật tư (id, mã vật tư, tên vật tư, đơn vị tính, giá tiền)
+Tồn kho (id, vật tư_id, số lượng đầu, tổng số lượng nhập, tổng số lượng xuất)
+
+Nhà Cung cấp (id, mã nhà cung cấp, tên nhà cung cấp, địa chỉ, số điện thoại)
+Đơn đặt hàng (id, mã đơn, ngày đặt hàng, nhà cung cấp_id)
+Phiếu nhập (id, mã phiếu nhập, ngày nhập, đơn hàng_id)    // đây còn gì, đây cũng có
+
+Phiếu xuất (id, mã phiếu xuất, ngày xuất, tên khách hàng)
+
+Chi tiết Đơn hàng (id, đơn hàng _id, vật tư_id, số lượng đặt)  // đây cũng có 
+Chi tiết Phiếu nhập (id, phiếu nhập_id, vật tư_id, số lượng nhập, đơn giá nhập, ghi chú)
+Chi tiết Phiếu xuất (id, phiếu xuất_id, vật tư_id, số lượng xuất, đơn giá xuất, ghi chú)
+
+Nhập 5 bản ghi bảng Vật tư
+Nhập 10 bản ghi bảng Tồn kho
+Nhập 3 nhà cung cấp
+Nhập 3 đơn hàng
+Nhập 3 phiếu nhập
+Nhập 3 phiếu xuất 
+Nhập 6 CT Đơn hàng
+Nhập 6 CT Phiếu nhập
+Nhập 6 CT Phiếu xuất
+
+
+Viết các câu query lấy ra theo các yêu cầu sau:
+
+
+Dữ liệu bao gồm các thông tin sau: số phiếu nhập hàng, mã vật tư, số lượng nhập, đơn giá nhập, thành tiền.
+số phiếu nhập hàng, mã vật tư, tên vật tư, số lượng nhập, đơn giá nhập, thành tiền nhập.
+số phiếu nhập hàng, ngày nhập hàng, số đơn đặt hàng, mã vật tư, tên vật tư, số lượng nhập, đơn giá nhập, thành tiền nhập.
+số phiếu nhập hàng, ngày nhập hàng, số đơn đặt hàng, mã nhà cung cấp, mã vật tư, tên vật tư, số lượng nhập, đơn giá nhập, thành tiền nhập.
+số phiếu nhập hàng, mã vật tư, số lượng nhập, đơn giá nhập, thành tiền nhập. Và chỉ liệt kê các chi tiết nhập có số lượng nhập > 5.
+số phiếu nhập hàng, mã vật tư, tên vật tư, số lượng nhập, đơn giá nhập, thành tiền nhập. Và chỉ liệt kê các chi tiết nhập vật tư có đơn vị tính là Bộ.
+số phiếu xuất hàng, mã vật tư, số lượng xuất, đơn giá xuất, thành tiền xuất.
+số phiếu xuất hàng, mã vật tư, tên vật tư, số lượng xuất, đơn giá xuất.
+ số phiếu xuất hàng, tên khách hàng, mã vật tư, tên vật tư, số lượng xuất, đơn giá xuất.
