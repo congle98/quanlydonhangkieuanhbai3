@@ -190,7 +190,7 @@ insert into chitietphieuxuat(phieuxuat_id, vattu_id, soluongxuat, dongiaxuat, gh
 values (3,5,20,75000,'Bán 20 cái búa tạ cho khách Phạm Thu Trang');
 
 
-# câu 1
+----------------------------------câu 1
 select
     ma_phieunhap,
     ma_vt,soluongnhap,
@@ -200,7 +200,7 @@ from phieunhap
          join chitietphieunhap on phieunhap.id = chitietphieunhap.phieunhap_id
          join vattu v on chitietphieunhap.vattu_id = v.id;
 
-# câu 2
+--------------------------câu 2
 select
     ma_phieunhap,
     ma_vt,
@@ -212,7 +212,7 @@ from phieunhap
          join chitietphieunhap on phieunhap.id = chitietphieunhap.phieunhap_id
          join vattu v on chitietphieunhap.vattu_id = v.id;
 
-# câu 3
+----------------------câu 3
 select
     ma_phieunhap,
     ngaynhap,
@@ -227,7 +227,7 @@ from phieunhap
          join vattu v on chitietphieunhap.vattu_id = v.id
          join dondathang d on d.id = phieunhap.donhang_id;
 
-# câu 4
+-----------------------câu 4
 
 select
     ma_phieunhap,
@@ -245,7 +245,7 @@ from phieunhap
          join dondathang d on d.id = phieunhap.donhang_id
          join nhacungcap n on n.id = d.ncc_id;
 
-# câu 5
+-------------------câu 5
 
 select
     ma_phieunhap,
@@ -257,7 +257,7 @@ from phieunhap
          join vattu v on chitietphieunhap.vattu_id = v.id
 where soluongnhap>30;
 
-# câu 6
+----------câu 6
 select
     ma_phieunhap,
     ma_vt,
@@ -271,7 +271,7 @@ from phieunhap
 where donvitinh = 'cái';
 
 
-# câu 7
+-----câu 7
 select
     ma_phieuxuat,
     ma_vt,
@@ -283,7 +283,7 @@ from chitietphieuxuat
          join phieuxuat p on chitietphieuxuat.phieuxuat_id = p.id
          join vattu v on v.id = chitietphieuxuat.vattu_id;
 
-# câu 8
+-------- câu 8
 select
     ma_phieuxuat,
     ma_vt,
@@ -294,7 +294,7 @@ from chitietphieuxuat
          join phieuxuat p on chitietphieuxuat.phieuxuat_id = p.id
          join vattu v on v.id = chitietphieuxuat.vattu_id;
 
-# câu 9
+---- câu 9
 select
     ma_phieuxuat,
     tenkhachhang,
@@ -305,3 +305,177 @@ select
 from chitietphieuxuat
          join phieuxuat p on chitietphieuxuat.phieuxuat_id = p.id
          join vattu v on v.id = chitietphieuxuat.vattu_id;
+
+
+---------------------------VIEW STORED PROCEDURE
+
+-- câu 1
+create view  vw_CTPNHAP as
+select ma_phieunhap,
+       ma_vt,
+       soluongnhap,
+       dongianhap,
+       (soluongnhap*dongianhap) as "Thành tiền"
+from phieunhap join chitietphieunhap c on phieunhap.id = c.phieunhap_id
+               join vattu v on c.vattu_id = v.id;
+select * from vw_CTPNHAP;
+-- câu 2
+create view vw_CTPNHAP_VT as
+select ma_phieunhap,
+       ma_vt,
+       ten_vt,
+       soluongnhap,
+       dongianhap,
+       (soluongnhap*dongianhap) as "Thành tiền"
+from phieunhap join chitietphieunhap c on phieunhap.id = c.phieunhap_id
+               join vattu v on c.vattu_id = v.id;
+select * from vw_CTPNHAP_VT;
+
+-- câu 3
+create view vw_CTPNHAP_VT_PN as
+select ma_phieunhap,
+       ngaynhap,
+       ma_donhang,
+       ma_vt,
+       ten_vt,
+       soluongnhap,
+       dongianhap,
+       (soluongnhap*dongianhap) as "Thành tiền"
+from phieunhap join chitietphieunhap c on phieunhap.id = c.phieunhap_id
+               join vattu v on c.vattu_id = v.id
+               join dondathang d on d.id = phieunhap.donhang_id;
+
+select * from  vw_CTPNHAP_VT_PN;
+
+-- câu 4
+create view vw_CTPNHAP_VT_PN_DH as
+select ma_phieunhap,
+       ngaynhap,
+       ma_donhang,
+       ma_ncc,
+       ma_vt,
+       ten_vt,
+       soluongnhap,
+       dongianhap,
+       (soluongnhap*dongianhap) as "Thành tiền"
+from phieunhap join chitietphieunhap c on phieunhap.id = c.phieunhap_id
+               join vattu v on c.vattu_id = v.id
+               join dondathang d on d.id = phieunhap.donhang_id
+               join nhacungcap n on n.id = d.ncc_id;
+
+select * from vw_CTPNHAP_VT_PN_DH;
+-- câu 5
+create view vw_CTPNHAP_loc as
+select ma_phieunhap,
+       ma_vt,
+       soluongnhap,
+       dongianhap,
+       (soluongnhap*dongianhap) as "Thành tiền"
+from
+    phieunhap join chitietphieunhap c on phieunhap.id = c.phieunhap_id
+              join vattu v on c.vattu_id = v.id
+where soluongnhap>20;
+select * from vw_CTPNHAP_loc;
+
+-- cau6
+create view vw_CTPNHAP_VT_loc as
+select ma_phieunhap,
+       ma_vt,
+       ten_vt,
+       soluongnhap,
+       dongianhap,
+       (soluongnhap*dongianhap) as "Thành tiền"
+from
+    phieunhap join chitietphieunhap c on phieunhap.id = c.phieunhap_id
+              join vattu v on c.vattu_id = v.id
+where donvitinh = 'cái';
+select * from vw_CTPNHAP_VT_loc;
+-- câu 7
+create view  vw_CTPXUAT as
+select ma_phieuxuat,
+       ma_vt,
+       soluongxuat,
+       dongiaxuat,
+       (soluongxuat*dongiaxuat) as "Thành tiền"
+from
+    phieuxuat join chitietphieuxuat c on phieuxuat.id = c.phieuxuat_id
+              join vattu v on v.id = c.vattu_id;
+select * from vw_CTPXUAT;
+
+-- câu 8
+create  view   vw_CTPXUAT_VT as
+select ma_phieuxuat,
+       ma_vt,
+       ten_vt,
+       soluongxuat,
+       dongiaxuat,
+       (soluongxuat*dongiaxuat) as "Thành tiền"
+from
+    phieuxuat join chitietphieuxuat c on phieuxuat.id = c.phieuxuat_id
+              join vattu v on v.id = c.vattu_id;
+select * from vw_CTPXUAT_VT;
+
+-- câu 9
+create  view   vw_CTPXUAT_VT_PX as
+select ma_phieuxuat,
+       tenkhachhang,
+       ma_vt,
+       ten_vt,
+       soluongxuat,
+       dongiaxuat,
+       (soluongxuat*dongiaxuat) as "Thành tiền"
+from
+    phieuxuat join chitietphieuxuat c on phieuxuat.id = c.phieuxuat_id
+              join vattu v on v.id = c.vattu_id;
+select * from vw_CTPXUAT_VT_PX;
+
+-- câu 1 stored procedure
+create procedure tongluong_vattu(in mavattu varchar(50))
+begin
+select soluong from vattu join tonkho t on vattu.id = t.vattu_id
+where ma_vt = mavattu;
+end;
+
+call  tongluong_vattu('vt05');
+
+-- câu 2 stored procedure
+create procedure tongtienxuat_vattu(in mavattu varchar(50))
+begin
+select sum(soluong*giatien) from vattu join tonkho t on vattu.id = t.vattu_id
+where ma_vt = mavattu
+group by vattu_id;
+end;
+
+call  tongtienxuat_vattu('vt05');
+
+-- câu 3
+
+create procedure tongluong_dat(in madonhang varchar(50))
+begin
+select sum(soluongdat)
+from dondathang join chitietdonhang c on dondathang.id = c.donhang_id
+where ma_donhang = madonhang
+group by donhang_id;
+end;
+
+call  tongluong_dat('ddh1');
+
+-- câu 4
+create procedure them_dondathang(in madonhang varchar(50),ngaydathang date, ncc_id int)
+begin
+insert into dondathang (ma_donhang, ngaydathang, ncc_id)
+values (madonhang,ngaydathang,ncc_id);
+end;
+
+call  them_dondathang('ddh4','2021-12-02',3);
+
+-- câu 5
+
+create procedure them_chitietdonhang(in ipdonhang_id int,ipvattu_id int, ipsoluongdat int)
+begin
+insert into chitietdonhang(donhang_id, vattu_id, soluongdat) VALUES
+(ipdonhang_id,ipvattu_id,ipsoluongdat);
+end;
+
+call  them_chitietdonhang('4','5',40);
+
